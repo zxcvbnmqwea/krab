@@ -324,5 +324,10 @@
 		<script src="./static/lg-thumbnail.min.js"></script>
 		<script src="./static/lg-zoom.min.js"></script>
 		<script src="./static/configurator.js"></script>
+        <script>
+            $("[my_attr=1]").click(function() {
+            	hideAndSeek($(this).attr("name"))
+            })
+        </script>
 
 </body></html>
