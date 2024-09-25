@@ -321,6 +321,10 @@ $("[my_attr=1]").click(function() {
 	hideAndSeek($(this).attr("name"))
 })
 
+$("[my_attr=1]").on("touch", function() {
+	hideAndSeek($(this).attr("name"))
+})
+
 function ptext(elem) {
 	var text = $(elem).text()
 	var name_of_p = $(elem).parent().parent().parent().attr("name")
