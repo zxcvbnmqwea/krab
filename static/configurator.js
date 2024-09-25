@@ -335,7 +335,7 @@ function hideAndSeek(name) {
 	closeOthers(name)
 }
 
-$("[my_attr=1]").click(function() {
+$("h1[my_attr=1]").click(function() {
 	hideAndSeek($(this).attr("name"))
 })
 
