@@ -376,7 +376,7 @@ function getInfoAndSendRequest() {
 			var modalBox = `<div class="modal fade inquiry-modal style-1" id="configuratorHolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="inquiry-adv">
-						<img src="/static/images/logo_to_modal.png" alt=""/>
+						<img src="./static/logo_to_modal.png" alt=""/>
 					</div>
 					<div class="modal-content">
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
