@@ -294,32 +294,32 @@ function closeOthers(name) {
 	var all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'h', 'co']
 	for (let item of all_list) {
 		if(item != name) {
-			$(`h1[name=${item}]`).css('font-size', '1rem');
+			// $(`h1[name=${item}]`).css('font-size', '1rem');
 			$(`div[name=${item}]`).addClass("d-none");
 		}	
 	}
 }
 
 function hideAndSeek(name) {
-	let currentFontSize = parseFloat($(`h1[name=${name}]`).css('font-size'));
+	// let currentFontSize = parseFloat($(`h1[name=${name}]`).css('font-size'));
 
 	// Переводим размер в rem (предполагая, что 1rem = 16px)
-	let currentFontSizeInRem = currentFontSize / 16;
+	// let currentFontSizeInRem = currentFontSize / 16;
 
 	// Если размер шрифта 1rem, то меняем его на 3rem, иначе возвращаем к 1rem
-	if (currentFontSizeInRem === 1) {
-		$(`h1[name=${name}]`).css('font-size', '3rem');
-	} else {
-		$(`h1[name=${name}]`).css('font-size', '1rem');
-	}
+	// if (currentFontSizeInRem === 1) {
+	// 	$(`h1[name=${name}]`).css('font-size', '3rem');
+	// } else {
+	// 	$(`h1[name=${name}]`).css('font-size', '1rem');
+	// }
 
 	$(`div[name=${name}]`).toggleClass("d-none");
 	closeOthers(name)
 }
 
-// $("[my_attr=1]").click(function() {
-// 	// hideAndSeek($(this).attr("name"))
-// })
+$("[my_attr=1]").click(function() {
+	hideAndSeek($(this).attr("name"))
+})
 
 function ptext(elem) {
 	var text = $(elem).text()
