@@ -313,7 +313,25 @@ function hideAndSeek(name) {
 	// 	$(`h1[name=${name}]`).css('font-size', '1rem');
 	// }
 
-	$(`div[name=${name}]`).toggleClass("d-none");
+	let content =$(`div[name=${name}]`);
+
+	// Если элемент скрыт (имеет класс d-none)
+	if (content.hasClass('d-none')) {
+		content.removeClass('d-none').hide().fadeIn(); // Убираем d-none, скрываем и затем плавно показываем
+	} 
+	// Если элемент видим
+	else {
+		content.fadeOut(function() {
+			content.addClass('d-none'); // После плавного скрытия добавляем d-none
+		});
+	}
+	
+	// if ($(`div[name=${name}]`).hasClass('d-none')) {
+	// 	$(this).fadeIn(500);
+	// } else {
+
+	// 	$(this).fadeOut(500); 
+	// }
 	closeOthers(name)
 }
 
