@@ -367,80 +367,46 @@ function getInfoAndSendRequest() {
 		 "awg_parametr":awg_parametr + "AWG", 'element_parametr': element_parametr,
 		 'order_count': order_count,
 	}
-	let message = `Привіт, Я хочу замовити ${order_count} батарей ${s_parametr}${p_parametr}P у форм факторі ${form_factor_parametr} з конектором ${"XT" + connector_parametr} та балансиром ${awg_parametr + "AWG"} з елементів ${element_parametr} замовити!`;
 
-	// Открываем чат с ботом для отправки сообщения
-	Telegram.WebApp.openTelegramLink(`https://t.me/test_web_app_for_krab_bot?start=${encodeURIComponent(message)}`);
-	var modalBox = `<div class="modal fade inquiry-modal style-1" id="configuratorHolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	 			<div class="modal-dialog" role="document">
-	 				<div class="inquiry-adv">
-	 					<img src="/static/images/logo_to_modal.png" alt=""/>
-	 				</div>
-	 				<div class="modal-content">
-	 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-	 					<span aria-hidden="true">
-	 						<i class="icon feather icon-x"></i>
-	 					</span>
-	 					</button>
-	 					<div>
-	 						<div class="modal-header">
+	$.ajax({
+		url: 'http://159.65.203.36:5000/process-request', 
+		type: 'POST', 
+		data: data,
+		success: function(response) {			
+			var modalBox = `<div class="modal fade inquiry-modal style-1" id="configuratorHolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="inquiry-adv">
+						<img src="/static/images/logo_to_modal.png" alt=""/>
+					</div>
+					<div class="modal-content">
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">
+							<i class="icon feather icon-x"></i>
+						</span>
+						</button>
+						<div>
+							<div class="modal-header">
 								
-	 							<h3 class="modal-title" id="exampleModalLongTitle">Вітаю, товар сконфігуровано!</h3>
-	 							<p class="text">Lorem ipsum dolor</p>
-	 						</div>
-	 						<div class="modal-body">
+								<h3 class="modal-title" id="exampleModalLongTitle">Вітаю, товар сконфігуровано!</h3>
+								<p class="text">Lorem ipsum dolor</p>
+							</div>
+							<div class="modal-body">
 							
-	 						</div>
-	 					</div>
-	 				</div>
-	 			</div>
-	 		</div>`;
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>`;
 
 			
-	jQuery('body').append(modalBox);
-	jQuery("#configuratorHolder").modal('show');
-	setTimeout(() => {
-		window.location.reload()
-	}, 5000)
-	// $.ajax({
-	// 	url: '', 
-	// 	type: 'POST', 
-	// 	data: data,
-	// 	success: function(response) {			
-	// 		var modalBox = `<div class="modal fade inquiry-modal style-1" id="configuratorHolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	// 			<div class="modal-dialog" role="document">
-	// 				<div class="inquiry-adv">
-	// 					<img src="/static/images/logo_to_modal.png" alt=""/>
-	// 				</div>
-	// 				<div class="modal-content">
-	// 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-	// 					<span aria-hidden="true">
-	// 						<i class="icon feather icon-x"></i>
-	// 					</span>
-	// 					</button>
-	// 					<div>
-	// 						<div class="modal-header">
-								
-	// 							<h3 class="modal-title" id="exampleModalLongTitle">Вітаю, товар сконфігуровано!</h3>
-	// 							<p class="text">Lorem ipsum dolor</p>
-	// 						</div>
-	// 						<div class="modal-body">
-							
-	// 						</div>
-	// 					</div>
-	// 				</div>
-	// 			</div>
-	// 		</div>`;
-
+			jQuery('body').append(modalBox);
+			jQuery("#configuratorHolder").modal('show');
+			setTimeout(() => {
+				window.location.reload()
+			}, 5000)
+		},
+		error: function(xhr, status, error) {
 			
-	// 		jQuery('body').append(modalBox);
-	// 		jQuery("#configuratorHolder").modal('show');
-	// 		setTimeout(() => {
-	// 			window.location.reload()
-	// 		}, 5000)
-	// 	},
-	// 	error: function(xhr, status, error) {
-			
-	// 	}
-	// });
+		}
+	});
 }
