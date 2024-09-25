@@ -367,7 +367,6 @@ function getInfoAndSendRequest() {
 		 "awg_parametr":awg_parametr + "AWG", 'element_parametr': element_parametr,
 		 'order_count': order_count,
 	}
-	let userId = Telegram.WebApp.initDataUnsafe.user.id;
 	let message = `Привіт, Я хочу замовити ${order_count} батарей ${s_parametr}${p_parametr}P у форм факторі ${form_factor_parametr} з конектором ${"XT" + connector_parametr} та балансиром ${awg_parametr + "AWG"} з елементів ${element_parametr} замовити!`;
 
 	// Открываем чат с ботом для отправки сообщения
