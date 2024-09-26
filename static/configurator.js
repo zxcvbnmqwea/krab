@@ -370,6 +370,7 @@ function getInfoAndSendRequest() {
 
 	$.ajax({
 		url: 'https://krab-bat.online/process-request', 
+		contentType: "application/json",
 		type: 'POST', 
 		data: data,
 		dataType: "json",
