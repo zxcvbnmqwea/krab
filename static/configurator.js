@@ -362,11 +362,11 @@ function getInfoAndSendRequest() {
 	var element_parametr = $("input[name=btnradio61]:checked").val()
 	var order_count = $("input[name=orderCount]").val()
 
-	data = {"s_p_parametr": `${s_parametr}${p_parametr}P`,
+	data = JSON.stringify({"s_p_parametr": `${s_parametr}${p_parametr}P`,
 		 "form_factor_parametr": form_factor_parametr, "connector_parametr": "XT" + connector_parametr,
 		 "awg_parametr":awg_parametr + "AWG", 'element_parametr': element_parametr,
 		 'order_count': order_count,
-	}
+	})
 
 	$.ajax({
 		url: 'https://krab-bat.online/process-request', 
