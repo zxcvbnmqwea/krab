@@ -372,6 +372,7 @@ function getInfoAndSendRequest() {
 		url: 'https://krab-bat.online/process-request', 
 		type: 'POST', 
 		data: data,
+		dataType: "json",
 		success: function(response) {			
 			var modalBox = `<div class="modal fade inquiry-modal style-1" id="configuratorHolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog" role="document">
