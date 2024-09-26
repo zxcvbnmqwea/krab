@@ -369,7 +369,7 @@ function getInfoAndSendRequest() {
 	}
 
 	$.ajax({
-		url: 'http://159.65.203.36:5000/process-request', 
+		url: 'https://krab-bat.online/process-request', 
 		type: 'POST', 
 		data: data,
 		success: function(response) {			
