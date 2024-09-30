@@ -105,8 +105,48 @@
         .animate-loading {
             animation: loadingAnimation 1.5s infinite; /* Бесконечная анимация */
         }
+
+
+
+        .roadmap {
+            width: 100%;
+            height: 20px; /* Уменьшаем высоту области для прогресс-бара */
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+        }
+
+        .step {
+            width: 5px; /* Уменьшаем размер точек */
+            height: 5px;
+            background-color: grey;
+            border-radius: 50%;
+        }
+
+        .line {
+            width: 50px; /* Длина прерывистого отрезка между точками */
+            height: 2px; /* Делаем линию тоньше */
+            background-color: grey;
+        }
+
+        .step.active {
+            background-color: black;
+        }
+
+        .line.active {
+            background-color: black;
+        }
+
     </style>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
 
 
 
@@ -122,19 +162,6 @@
         <div class="loading-text animate-loading">LOADING...</div>
     </div>
     <div class="page-wraper">
-
-        <!-- 	
-	<header class="site-header mo-left header border-bottom">			
-        <div class="sticky-header main-bar-wraper navbar-expand-lg">
-            <div class="main-bar clearfix">
-                <div class="container-fluid clearfix">
-                    <div class="logo-header logo-dark">
-                        <img src="./static/krab_text_logo.png" alt="logo">
-                    </div>	
-                </div>
-            </div>
-        </div>
-    </header> -->
         <header class="site-header mo-left header border-bottom">
             <!-- Main Header -->
             <div class="sticky-header main-bar-wraper navbar-expand-lg">
@@ -148,8 +175,18 @@
                 </div>
             </div>
 
-            <!-- Sidebar cart -->
         </header>
+        <div class="roadmap">
+            <div class="steps">
+                <div class="step active"></div>
+                <div class="line"></div>
+                <div class="step"></div>
+                <div class="line"></div>
+                <div class="step"></div>
+                <div class="line"></div>
+                <div class="step"></div>
+            </div>
+        </div>
         <!-- Header End -->
 
         <div class="page-content bg-white">
@@ -157,8 +194,8 @@
             <!--Swiper Banner Start -->
 
 
-            <div class="container-fluid">
-                <div class="banner-content" style="padding-top: 30px;">
+            <div id="content_1" class="container-fluid">
+                <div class="banner-content" style="padding-top: 10px;">
                     <div class="row gx-0">
                         <div class="col-md-12 col-sm-12 align-self-center">
                             <div class="swiper-content">
@@ -312,7 +349,7 @@
                                             <span class="color-name">Тип</span>
 
                                             <div class="btn-group product-size mb-0">
-                                                <input type="radio" elemname="molicel" value="Molicel P42A grade A 2024"
+                                                <input type="radio" elemname="molicel" price="180" value="Molicel P42A grade A 2024"
                                                     class="btn-check" name="btnradio61" id="btnradio611">
                                                 <label class="btn w-100" for="btnradio611">Molicel P42A grade A
                                                     2024</label>
@@ -324,18 +361,63 @@
                                                     2022</label>
                                             </div>
                                             <div class="btn-group product-size mb-0">
-                                                <input type="radio" elemname="westing" value="Westing House 21700 10C"
+                                                <input type="radio" elemname="westing" price="145" value="Westing House 21700 10C"
                                                     class="btn-check" name="btnradio61" id="btnradio613">
                                                 <label class="btn w-100" for="btnradio613">Westing House 21700
                                                     10C</label>
                                             </div>
                                             <div class="btn-group product-size mb-0">
-                                                <input type="radio" elemname="lgm" value="LGM 50L/m SOLT"
+                                                <input type="radio" elemname="lgm" price="210" value="LGM 50L/m SOLT"
                                                     class="btn-check" name="btnradio61" id="btnradio614">
                                                 <label class="btn w-100" for="btnradio614">LGM 50L/m SOLT</label>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="content-btn mt-2 d-flex align-self-center" data-swiper-parallax="-60"
+                                        style="display: flex; justify-content: center;">
+                                        <!-- onclick="getInfoAndSendRequest();"  -->
+                                        <div id="next_block_1" class="btn btn-outline-secondary btnhover20">
+                                            Наступний крок</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="content_2" class="container-fluid d-none">
+                <div class="banner-content" style="padding-top: 30px;">
+                    <div class="row gx-0">
+                        <div class="col-md-12 col-sm-12 align-self-center">
+                            <div class="swiper-content">
+                                <div class="content-info">
+                                    <h1 my_attr="1" name="pa" class="title mb-2" style="font-size: 2rem; "
+                                        data-swiper-parallax="-20">Спосіб оплати</h1>
+                                    <p name="pa" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
+                                        Не обрано</p>
+
+                                    <div my_attr="1" name="pa" class="swiper-meta-items"
+                                        data-swiper-parallax="-50">
+                                        <div class="d-block col-xl-12">
+                                            <span class="color-name">Тип</span>                  
+                                            <div class="btn-group product-size mb-0">
+                                                <input type="radio" value="0" class="btn-check" name="btnradio2_11"
+                                                id="btnradio2_11">
+                                                <label class="btn w-100" for="btnradio2_11">Фіз особа</label>
+                                            </div>
+                                            <div class="btn-group product-size mb-0">
+                                                <input type="radio" value="1" class="btn-check" name="btnradio2_11"
+                                                id="btnradio2_12">
+                                                <label class="btn w-100" for="btnradio2_12">ФОП</label>
+                                            </div>
+                                            <div class="btn-group product-size mb-0">
+                                                <input type="radio" value="2" class="btn-check" name="btnradio2_11"
+                                                id="btnradio2_13">
+                                                <label class="btn w-100" for="btnradio2_13">Юр. особа</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <h1 my_attr="1" name="co" class="title mb-2" style="font-size: 2rem; "
                                         data-swiper-parallax="-20">Кількість</h1>
                                     <p name="co" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
@@ -348,7 +430,7 @@
                                             <div class="btn-group product-size mb-0">
                                                 <div class="form-group col-xl-12 w-100">
                                                     <div class="input-group mb-0">
-                                                        <input oninput="checkCount()" name="orderCount"
+                                                        <input oninput="calcPrice()" name="orderCount"
                                                             style="background-color: white;" type="number" min="1"
                                                             class="form-control" placeholder="Кількість">
                                                     </div>
@@ -356,10 +438,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="content-btn mt-2 d-flex align-self-center" data-swiper-parallax="-60"
+                                    <h1 name="pr" class="title mb-2" style="font-size: 2rem; "
+                                        data-swiper-parallax="-20">Ціна</h1>
+                                    <p name="pr" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
+                                        Не обрано</p>
+                                    <!-- <div class="content-btn mt-2 d-flex align-self-center" data-swiper-parallax="-60"
                                         style="display: flex; justify-content: center;">
-                                        <div onclick="getInfoAndSendRequest();" class="btn btn-outline-secondary btnhover20">
-                                            Відправити запит</div>
+                                        <div id="prev_block_2" class="btn btn-outline-secondary btnhover20">
+                                            Назад</div>
+                                        <div id="next_block_2" class="btn btn-outline-secondary btnhover20">
+                                            Наступний крок</div>
+                                        
+                                    </div>                                   -->
+                                    <div class="content-btn mt-2 d-flex align-self-center" data-swiper-parallax="-60"
+                                        style="display: flex; justify-content: space-between;">
+                                        <div id="prev_block_2" class="btn btn-outline-secondary btnhover20">
+                                            Попередній крок
+                                        </div>
+                                        <div id="next_block_2" class="btn btn-outline-secondary btnhover20">
+                                            Наступний крок
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +465,117 @@
                     </div>
                 </div>
             </div>
+            <div id="content_3" class="container-fluid d-none">
+                <div class="banner-content" style="padding-top: 30px;">
+                    <div class="row gx-0">
+                        <div class="col-md-12 col-sm-12 align-self-center">
+                            <div class="swiper-content">
+                                <div class="content-info">
+                                    <div id="da"></div>
+                                    <div class="content-btn mt-2 d-flex align-self-center" data-swiper-parallax="-60"
+                                        style="display: flex; justify-content: space-between;">
+                                        <div id="prev_block_3" class="btn btn-outline-secondary btnhover20">
+                                            Попередній крок
+                                        </div>
+                                        <div id="next_block_3" class="btn btn-outline-secondary btnhover20">
+                                            Наступний крок
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="content_4" class="container-fluid d-none">
+            <div class="banner-content" style="padding-top: 30px;">
+                <div class="row gx-0">
+                    <div class="col-md-12 col-sm-12 align-self-center">
+                        <div class="swiper-content">
+                            <div class="content-info">
+                                <h1 my_attr="1" name="np" class="title mb-2" style="font-size: 2rem; "
+                                    data-swiper-parallax="-20">Місто для НП</h1>
+                                <p name="np" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
+                                    Не обрано</p>
 
+                                <div name="np" class="swiper-meta-items" data-swiper-parallax="-50">
+                                    <div class="d-block col-xl-12">
+                                        <!-- <span class="color-name">Ваша примітка</span> -->
+
+                                        <div class="btn-group product-size mb-0">
+                                            <div class="form-group col-xl-12 w-100">
+                                                <div class="input-group mb-0">
+                                                    <input name="bp_city"
+                                                        style="background-color: white;" type="text" min="1"
+                                                        class="form-control" placeholder="Місто">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h1 my_attr="1" name="np_v" class="title mb-2" style="font-size: 2rem; "
+                                data-swiper-parallax="-20">Відділення для НП</h1>
+                                <p name="np_v" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
+                                    Не обрано</p>
+
+                                <div name="np_v" class="swiper-meta-items" data-swiper-parallax="-50">
+                                    <div class="d-block col-xl-12">
+                                        <!-- <span class="color-name">Ваша примітка</span> -->
+
+                                        <div class="btn-group product-size mb-0">
+                                            <div class="form-group col-xl-12 w-100">
+                                                <div class="input-group mb-0">
+                                                    <input name="bp_city"
+                                                        style="background-color: white;" type="text" min="1"
+                                                        class="form-control" placeholder="Відділення">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h1 my_attr="1" name="np_t" class="title mb-2" style="font-size: 2rem; "
+                                data-swiper-parallax="-20">Телефон для НП</h1>
+                                <p name="np_t" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
+                                    Не обрано</p>
+
+                                <div name="np_t" class="swiper-meta-items" data-swiper-parallax="-50">
+                                    <div class="d-block col-xl-12">
+                                        <!-- <span class="color-name">Ваша примітка</span> -->
+
+                                        <div class="btn-group product-size mb-0">
+                                            <div class="form-group col-xl-12 w-100">
+                                                <div class="input-group mb-0">
+                                                    <input name="bp_city"
+                                                        style="background-color: white;" type="text" min="1"
+                                                        class="form-control" placeholder="Телефон для НП">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="content-btn mt-2 d-flex align-self-center" data-swiper-parallax="-60"
+                                    style="display: flex; justify-content: center;">
+                                    <div id="prev_block_2" class="btn btn-outline-secondary btnhover20">
+                                        Назад</div>
+                                    <div id="next_block_2" class="btn btn-outline-secondary btnhover20">
+                                        Наступний крок</div>
+                                    
+                                </div>                                   -->
+                                <div class="content-btn mt-2 d-flex align-self-center" data-swiper-parallax="-60"
+                                    style="display: flex; justify-content: space-between;">
+                                    <div id="prev_block_4" class="btn btn-outline-secondary btnhover20">
+                                        Попередній крок
+                                    </div>
+                                    <div class="btn btn-outline-secondary btnhover20">
+                                        Відправити запит
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
             <!-- </div>		 -->
             <!--Swiper Banner End-->
 

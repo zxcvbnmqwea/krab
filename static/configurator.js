@@ -289,55 +289,171 @@ function checkAndSaveRequest() {
 }
 
 // hide and seek
-
 function closeOthers(name) {
-	var all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'h', 'co']
+	var all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'pa', 'co', 'da', 'np', 'np_v', 'np_t'];
+	// Закрываем все блоки, кроме текущего
 	for (let item of all_list) {
 		if(item != name) {
-			// $(`h1[name=${item}]`).css('font-size', '1rem');
-			$(`div[name=${item}]`).addClass("d-none");
-		}	
+			$(`div[name=${item}]`).fadeOut(500, function() {
+				$(this).addClass("d-none");
+			});
+		}
 	}
 }
 
-function hideAndSeek(name) {
-	// let currentFontSize = parseFloat($(`h1[name=${name}]`).css('font-size'));
+function getNextName(name) {
+	// Находим индекс текущего элемента
+	const all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'pa', 'co', 'da', 'np', 'np_v', 'np_t'];
+	var currentElement = name; // Пример текущего элемента
+	const currentIndex = all_list.indexOf(currentElement);
 
-	// Переводим размер в rem (предполагая, что 1rem = 16px)
-	// let currentFontSizeInRem = currentFontSize / 16;
+	if (currentIndex !== -1 && currentIndex < all_list.length - 1) {
+		// Если элемент найден и это не последний элемент в массиве
+		var nextElement = all_list[currentIndex + 1];
+		return nextElement;
+	} else {
+		return currentElement;
+	}
+}
 
-	// Если размер шрифта 1rem, то меняем его на 3rem, иначе возвращаем к 1rem
-	// if (currentFontSizeInRem === 1) {
-	// 	$(`h1[name=${name}]`).css('font-size', '3rem');
-	// } else {
-	// 	$(`h1[name=${name}]`).css('font-size', '1rem');
-	// }
-
-	let content =$(`div[name=${name}]`);
-
+function hideAndSeek(content) {
+	var all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'pa', 'co', 'da', 'np', 'np_v', 'np_t'];
 	// Если элемент скрыт (имеет класс d-none)
 	if (content.hasClass('d-none')) {
-		content.removeClass('d-none').hide().fadeIn(); // Убираем d-none, скрываем и затем плавно показываем
+		content.removeClass('d-none').hide().fadeIn(500); // Убираем d-none, скрываем и затем плавно показываем
+		closeOthers(content.attr("name"));
 	} 
 	// Если элемент видим
 	else {
-		content.fadeOut(function() {
-			content.addClass('d-none'); // После плавного скрытия добавляем d-none
+		content.fadeOut(500, function() {
+			content.addClass('d-none');
+			$(`div[name=${getNextName(content.attr("name"))}]`).removeClass('d-none').hide().fadeIn(500)
 		});
-	}
-	
-	// if ($(`div[name=${name}]`).hasClass('d-none')) {
-	// 	$(this).fadeIn(500);
-	// } else {
+		closeOthers(content.attr("name"));
 
-	// 	$(this).fadeOut(500); 
-	// }
-	closeOthers(name)
+		
+	}
 }
 
-$("h1[my_attr=1]").click(function() {
-	hideAndSeek($(this).attr("name"))
+// если физ лицо
+// ПІБ
+
+// если ФОП
+// ПІБ
+// ЄДРПОУ / ІПН
+
+// если юр особа
+// Назва юр особи
+// ЄДРПОУ
+$("input[name=btnradio2_11]").change(function() {
+	var pay_type = $('input[name="btnradio2_11"]:checked').val()
+	var name;
+	var second_name = null;
+	if(pay_type == "0") {
+		name = "ПІБ"
+	} else if(pay_type == "1") {
+		name = "ПІБ"
+		second_name = "ЄДРПОУ / ІПН"
+	} else if(pay_type == "2") {
+		name = "Назва юр особи"
+		second_name = "ЄДРПОУ"
+	}
+	$("#da").empty()
+	if(second_name != null) {
+		$("#da").prepend(`<h1 my_attr="1" name="da" class="title mb-2" style="font-size: 2rem; "
+			data-swiper-parallax="-20">${second_name}</h1>
+		<p name="da" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
+			Не обрано</p>
+	
+		<div name="da" class="swiper-meta-items" data-swiper-parallax="-50">
+			<div class="d-block col-xl-12">
+				<div class="btn-group product-size mb-0">
+					<div class="form-group col-xl-12 w-100">
+						<div class="input-group mb-0">
+							<input name="name"
+								style="background-color: white;" type="text" min="1"
+								class="form-control" placeholder="${second_name}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>`)
+	}
+
+	$("#da").prepend(`<h1 my_attr="1" name="da" class="title mb-2" style="font-size: 2rem; "
+		data-swiper-parallax="-20">${name}</h1>
+	<p name="da" class="text mb-0" style="font-size: 1rem; " data-swiper-parallax="-40">
+		Не обрано</p>
+
+	<div name="da" class="swiper-meta-items" data-swiper-parallax="-50">
+		<div class="d-block col-xl-12">
+			<div class="btn-group product-size mb-0">
+				<div class="form-group col-xl-12 w-100">
+					<div class="input-group mb-0">
+						<input name="name"
+							style="background-color: white;" type="text" min="1"
+							class="form-control" placeholder="${name}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>`)
+	
+
 })
+
+$("[my_attr=1]").click(function() {
+	let content = $(`div[name=${$(this).attr("name")}]`);
+	hideAndSeek(content);
+})
+
+// $("div[my_attr=1]").click(function() {
+// 	let content = $(this);
+// 	hideAndSeek(content);
+// })
+
+$("#next_block_1").click(function() {
+	$('#content_1').fadeOut(500, function() {  // Медленно скрываем первый блок
+		$('#content_2').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+	});
+	updateStep(1)
+})
+
+$("#prev_block_2").click(function() {
+	$('#content_2').fadeOut(500, function() {  // Медленно скрываем первый блок
+		$('#content_1').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+	});
+	updateStep(0)
+})
+
+$("#next_block_2").click(function() {
+	$('#content_2').fadeOut(500, function() {  // Медленно скрываем первый блок
+		$('#content_3').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+	});
+	updateStep(2)
+})
+
+$("#prev_block_3").click(function() {
+	$('#content_3').fadeOut(500, function() {  // Медленно скрываем первый блок
+		$('#content_2').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+	});
+	updateStep(1)
+})
+
+$("#next_block_3").click(function() {
+	$('#content_3').fadeOut(500, function() {  // Медленно скрываем первый блок
+		$('#content_4').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+	});
+	updateStep(3)
+})
+
+$("#prev_block_4").click(function() {
+	$('#content_4').fadeOut(500, function() {  // Медленно скрываем первый блок
+		$('#content_3').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+	});
+	updateStep(2)
+})
+
 
 function ptext(elem) {
 	var text = $(elem).text()
@@ -352,6 +468,19 @@ $(document).ready(function() {
         ptext(this)
     });
 });
+
+function roundDownTo50(value) {
+    return Math.floor(value / 50) * 50;
+}
+
+function calcPrice() {
+	var s_parametr = $("input[name=btnradio11]:checked").val().split("S")[0]
+	var p_parametr = $("input[name=btnradio21]:checked").val()
+	var element_parametr = $("input[name=btnradio61]:checked").attr("price")
+	var price = +s_parametr * +p_parametr * +element_parametr;
+	var price_without_rounding = (price + 500) * 1.1
+	$("p[name=pr]").text(roundDownTo50(price_without_rounding) * +$("input[name=orderCount]").val())
+}
 
 function getInfoAndSendRequest() {
 	var s_parametr = $("input[name=btnradio11]:checked").val()
@@ -411,4 +540,26 @@ function getInfoAndSendRequest() {
 			
 		}
 	});
+}
+
+
+function updateStep(stepIndex) {
+    // Получаем все шаги и линии
+    const steps = document.querySelectorAll('.step');
+    const lines = document.querySelectorAll('.line');
+
+    // Сброс всех активных шагов и линий
+    steps.forEach((step, index) => {
+        step.classList.remove('active');
+        if (index <= stepIndex) {
+            step.classList.add('active');
+        }
+    });
+
+    lines.forEach((line, index) => {
+        line.classList.remove('active');
+        if (index < stepIndex) {
+            line.classList.add('active');
+        }
+    });
 }
