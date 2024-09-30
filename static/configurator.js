@@ -370,7 +370,7 @@ $("input[name=btnradio2_11]").change(function() {
 				<div class="btn-group product-size mb-0">
 					<div class="form-group col-xl-12 w-100">
 						<div class="input-group mb-0">
-							<input name="name"
+							<input name="second_name"
 								style="background-color: white;" type="text" min="1"
 								class="form-control" placeholder="${second_name}">
 						</div>
@@ -490,11 +490,19 @@ function getInfoAndSendRequest() {
 	var awg_parametr = $("input[name=btnradio51]:checked").val()
 	var element_parametr = $("input[name=btnradio61]:checked").val()
 	var order_count = $("input[name=orderCount]").val()
+	var amount = $("input[name=orderCount]").val()
+	var name = $("input[name=name]").val()
+	var second_name = $("input[name=second_name]").val()
+	var pa_type = $("input[name=btnradio2_11]:checked").next("label").text()
+	var np_city = $("input[name=np_city]").val()
+	var np_vid = $("input[name=np_vid]").val()
+	var np_tel = $("input[name=np_tel]").val()
 
 	data = JSON.stringify({"s_p_parametr": `${s_parametr}${p_parametr}P`,
 		 "form_factor_parametr": form_factor_parametr, "connector_parametr": "XT" + connector_parametr,
 		 "awg_parametr":awg_parametr + "AWG", 'element_parametr': element_parametr,
-		 'order_count': order_count,
+		 'order_count': order_count, 'amount': amount, "name": name, "second_name": second_name,
+		 'pa_type': pa_type, 'np_city': np_city, "np_vid": np_vid, "np_tel": np_tel
 	})
 
 	$.ajax({
