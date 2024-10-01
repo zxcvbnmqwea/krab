@@ -159,7 +159,7 @@ $("input[name=btnradio21]").on("click", () => {
 		to_append += `<input type="radio" class="btn-check" connectorName="xt90" value="90" name="btnradio41" id="btnradio412" >
 		<label class="btn px-5" for="btnradio412">XT90</label>`
 		to_append += `<input type="radio" class="btn-check" connectorName="qs8-s"  value="8" name="btnradio41" id="btnradio413" >
-		<label class="btn px-5" style="width: 40%" for="btnradio413">QS8-S</label>`
+		<label class="btn px-5" style="width: 53%" for="btnradio413">QS8-S</label>`
 	}
 	$("#connectorHolder").append(to_append)
 	$("input[name=btnradio41]").on("click", () => { 
