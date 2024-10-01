@@ -319,32 +319,22 @@ function getNextName(name) {
 function hideAndSeek(content) {
 	var all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'pa', 'co', 'da', 'np', 'np_v', 'np_t'];
 	// Если элемент скрыт (имеет класс d-none)
-	if (content.hasClass('d-none')) {
-		content.removeClass('d-none').hide().fadeIn(500); // Убираем d-none, скрываем и затем плавно показываем
-		closeOthers(content.attr("name"));
-	} 
-	// Если элемент видим
-	else {
-		content.fadeOut(500, function() {
-			content.addClass('d-none');
-			$(`div[name=${getNextName(content.attr("name"))}]`).removeClass('d-none').hide().fadeIn(500)
-		});
-		closeOthers(content.attr("name"));
+	// if (content.hasClass('d-none')) {
+	// 	content.removeClass('d-none').hide().fadeIn(500); // Убираем d-none, скрываем и затем плавно показываем
+	// 	closeOthers(content.attr("name"));
+	// } 
+	// // Если элемент видим
+	// else {
+	// 	content.fadeOut(500, function() {
+	// 		content.addClass('d-none');
+	// 		$(`div[name=${getNextName(content.attr("name"))}]`).removeClass('d-none').hide().fadeIn(500)
+	// 	});
+	// 	closeOthers(content.attr("name"));
 
 		
-	}
+	// }
 }
 
-// если физ лицо
-// ПІБ
-
-// если ФОП
-// ПІБ
-// ЄДРПОУ / ІПН
-
-// если юр особа
-// Назва юр особи
-// ЄДРПОУ
 $("input[name=btnradio2_11]").change(function() {
 	var pay_type = $('input[name="btnradio2_11"]:checked').val()
 	var name;
@@ -370,7 +360,7 @@ $("input[name=btnradio2_11]").change(function() {
 				<div class="btn-group product-size mb-0">
 					<div class="form-group col-xl-12 w-100">
 						<div class="input-group mb-0">
-							<input name="second_name"
+							<input oninput="sendTextToP(this)" input_repeater="1" name="second_name"
 								style="background-color: white;" type="text" min="1"
 								class="form-control" placeholder="${second_name}">
 						</div>
@@ -390,7 +380,7 @@ $("input[name=btnradio2_11]").change(function() {
 			<div class="btn-group product-size mb-0">
 				<div class="form-group col-xl-12 w-100">
 					<div class="input-group mb-0">
-						<input name="name"
+						<input oninput="sendTextToP(this)" input_repeater="1" name="name"
 							style="background-color: white;" type="text" min="1"
 							class="form-control" placeholder="${name}">
 					</div>
@@ -454,6 +444,14 @@ $("#prev_block_4").click(function() {
 	updateStep(2)
 })
 
+function sendTextToP(elem) {
+	$(elem).parent().parent().parent().parent().parent().prev("p").text($(elem).val())
+
+}
+
+$("input[input_repeater=1]").on("input", function() {
+	sendTextToP(this)
+})
 
 function ptext(elem) {
 	var text = $(elem).text()
