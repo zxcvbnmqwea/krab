@@ -220,54 +220,6 @@ function xtHandler() {
 }
 
 
-function addToCartCustomOrder(data) {
-	$.ajax({
-		url: '/add-custom-cart/', 
-		type: 'POST', 
-		data: data,
-		success: function(response) {
-			loadCartCount();
-			loadCart();
-			
-			var modalBox = `<div class="modal fade inquiry-modal style-1" id="configuratorHolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="inquiry-adv">
-						<img src="/static/images/logo_to_modal.png" alt=""/>
-					</div>
-					<div class="modal-content">
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">
-							<i class="icon feather icon-x"></i>
-						</span>
-						</button>
-						<div>
-							<div class="modal-header">
-								
-								<h3 class="modal-title" id="exampleModalLongTitle">Вітаю, товар сконфігуровано!</h3>
-								<p class="text">Lorem ipsum dolor</p>
-							</div>
-							<div class="modal-body">
-							
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>`;
-
-			
-			jQuery('body').append(modalBox);
-			jQuery("#configuratorHolder").modal('show');
-			setTimeout(() => {
-				window.location.href = "/cart/"
-			}, 5000)
-		},
-		error: function(xhr, status, error) {
-			
-		}
-	});
-}
-
-
 function checkAndSaveRequest() {
 	var s_parametr = $("input[name=btnradio11]:checked").val()
 	var p_parametr = $("input[name=btnradio21]:checked").val()
@@ -516,16 +468,11 @@ function getInfoAndSendRequest() {
 						<img src="./static/logo_to_modal.png" alt=""/>
 					</div>
 					<div class="modal-content">
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">
-							<i class="icon feather icon-x"></i>
-						</span>
-						</button>
 						<div>
 							<div class="modal-header">
 								
 								<h3 class="modal-title" id="exampleModalLongTitle">Вітаю, товар сконфігуровано!</h3>
-								<p class="text">Lorem ipsum dolor</p>
+								<p class="text">Скоро з вами зв'яжуться з приводу оплати</p>
 							</div>
 							<div class="modal-body">
 							
@@ -540,7 +487,7 @@ function getInfoAndSendRequest() {
 			jQuery("#configuratorHolder").modal('show');
 			setTimeout(() => {
 				window.location.reload()
-			}, 5000)
+			}, 10000)
 		},
 		error: function(xhr, status, error) {
 			
