@@ -269,7 +269,7 @@ function getNextName(name) {
 }
 
 function hideAndSeek(content) {
-	var all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'pa', 'co', 'da', 'np', 'np_v', 'np_t'];
+	// var all_list = ["s", "p", 'ff', 'c', 'b', 'e', 'pa', 'co', 'da', 'np', 'np_v', 'np_t'];
 	// Если элемент скрыт (имеет класс d-none)
 	// if (content.hasClass('d-none')) {
 	// 	content.removeClass('d-none').hide().fadeIn(500); // Убираем d-none, скрываем и затем плавно показываем
@@ -355,10 +355,13 @@ $("[my_attr=1]").click(function() {
 // })
 
 $("#next_block_1").click(function() {
-	$('#content_1').fadeOut(500, function() {  // Медленно скрываем первый блок
-		$('#content_2').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
-	});
-	updateStep(1)
+	if(validateRadioButtonsInBlock("content_1")) {
+		$('#content_1').fadeOut(500, function() {  // Медленно скрываем первый блок
+			$('#content_2').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+		});
+		updateStep(1)
+	}
+	
 })
 
 $("#prev_block_2").click(function() {
@@ -369,10 +372,12 @@ $("#prev_block_2").click(function() {
 })
 
 $("#next_block_2").click(function() {
-	$('#content_2').fadeOut(500, function() {  // Медленно скрываем первый блок
-		$('#content_3').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
-	});
-	updateStep(2)
+	if(validateRadioButtonsInBlock("content_2")) {
+		$('#content_2').fadeOut(500, function() {  // Медленно скрываем первый блок
+			$('#content_3').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+		});
+		updateStep(2)
+	}
 })
 
 $("#prev_block_3").click(function() {
@@ -383,10 +388,12 @@ $("#prev_block_3").click(function() {
 })
 
 $("#next_block_3").click(function() {
-	$('#content_3').fadeOut(500, function() {  // Медленно скрываем первый блок
-		$('#content_4').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
-	});
-	updateStep(3)
+	if(validateRadioButtonsInBlock("content_3")) {
+		$('#content_3').fadeOut(500, function() {  // Медленно скрываем первый блок
+			$('#content_4').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
+		});
+		updateStep(3)
+	}
 })
 
 $("#prev_block_4").click(function() {
@@ -433,6 +440,9 @@ function calcPrice() {
 }
 
 function getInfoAndSendRequest() {
+	if(validateRadioButtonsInBlock("content_4") == false) {
+		return;
+	}
 	var s_parametr = $("input[name=btnradio11]:checked").val()
 	var p_parametr = $("input[name=btnradio21]:checked").val()
 	var form_factor_parametr = $("input[name=btnradio31]:checked").val()
@@ -515,4 +525,38 @@ function updateStep(stepIndex) {
             line.classList.add('active');
         }
     });
+}
+
+function validateRadioButtonsInBlock(blockId) {
+    var isValid = true;
+    // Итерируем по всем группам радиокнопок в блоке
+    $('#' + blockId + ' input[type="radio"]').each(function() {
+        var name = $(this).attr('name');
+        // Убираем предыдущую подсветку (если была)
+        $(this).parent().parent().parent().prev("p").css('color', '#5e626f');
+        
+        // Проверяем, если хотя бы одна радиокнопка с данным именем выбрана
+        if ($('input[name="' + name + '"]:checked').length === 0) {
+            isValid = false;
+            console.log(name)
+            // Подсвечиваем ближайший элемент <p> выше радиокнопок
+            // $('p[name="' + name + '"]').css('color', 'red');
+			$(this).parent().parent().parent().prev("p").css('color', 'red');
+        }
+    });
+
+	$('#' + blockId + ' input[type="text"], #' + blockId + ' input[type="number"]').each(function() {
+        // Убираем предыдущую подсветку (если была)
+		$(this).parent().parent().parent().parent().parent().prev("p").css('color', '#5e626f');
+
+        // Проверяем, пустой ли инпут
+        if ($(this).val().trim() === '') {
+            isValid = false;
+            
+            // Подсвечиваем ближайший элемент <p> выше текстового инпута
+            $(this).parent().parent().parent().parent().parent().prev("p").css('color', 'red');
+        }
+    });
+
+    return isValid;
 }
