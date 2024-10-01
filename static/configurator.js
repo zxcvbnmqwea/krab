@@ -28,6 +28,12 @@ function addListenersForPhotoChange() {
 	})
 }
 
+
+$("input[name=btnradio11]").on("click", () => { // choose 1P 6S1P => 3X2 choose 4S1P => 2X2
+	$("input[name=btnradio21]").prop('checked', false);
+})
+
+
 $("label[for=btnradio211]").on("click", () => { // choose 1P 6S1P => 3X2 choose 4S1P => 2X2
 	var s_value = $('input[name=btnradio11]:checked').val(); // if 0 => 6S if 1 => 4S
 	var to_append = '';
@@ -152,8 +158,8 @@ $("input[name=btnradio21]").on("click", () => {
 		<label class="btn px-5" for="btnradio411">XT60</label>`
 		to_append += `<input type="radio" class="btn-check" connectorName="xt90" value="90" name="btnradio41" id="btnradio412" >
 		<label class="btn px-5" for="btnradio412">XT90</label>`
-		to_append += `<input type="radio" class="btn-check" connectorName="ec8"  value="8" name="btnradio41" id="btnradio413" >
-		<label class="btn px-5" for="btnradio413">EC8</label>`
+		to_append += `<input type="radio" class="btn-check" connectorName="qs8-s"  value="8" name="btnradio41" id="btnradio413" >
+		<label class="btn px-5" style="width: 40%" for="btnradio413">QS8-S</label>`
 	}
 	$("#connectorHolder").append(to_append)
 	$("input[name=btnradio41]").on("click", () => { 
@@ -209,7 +215,9 @@ function xtHandler() {
 		
 	} else if(s_value == 8) {
 		to_append = `<input type="radio" class="btn-check" value="8" name="btnradio51" id="btnradio511" >
-		<label class="btn px-5" for="btnradio511">EC8</label>`
+		<label class="btn px-5" for="btnradio511">8AWG</label>`
+		to_append += `<input type="radio" class="btn-check" value="7" name="btnradio51" id="btnradio512" >
+		<label class="btn px-5" for="btnradio512">7AWG</label>`
 	}
 	$("#awgHolder").append(to_append)
 
@@ -360,6 +368,7 @@ $("#next_block_1").click(function() {
 			$('#content_2').removeClass('d-none').hide().fadeIn(500);  // Появляется второй блок
 		});
 		updateStep(1)
+		calcPrice()
 	}
 	
 })
