@@ -145,21 +145,21 @@ $("input[name=btnradio21]").on("click", () => {
 	$("#connectorHolder").empty()
 	if(s_value == 1) {
 		to_append = `<input type="radio" class="btn-check" connectorName="xt30" value="30" name="btnradio41" id="btnradio411" >
-		<label class="btn px-5" for="btnradio411">XT30</label>`
+		<label class="btn px-5 w-100" for="btnradio411">XT30</label>`
 		to_append += `<input type="radio" class="btn-check" connectorName="xt60" value="60" name="btnradio41" id="btnradio412" >
-		<label class="btn px-5" for="btnradio412">XT60</label>`
+		<label class="btn px-5 w-100" for="btnradio412">XT60</label>`
 	} else if(s_value == 2) {
 		to_append = `<input type="radio" class="btn-check" connectorName="xt60" value="60" name="btnradio41" id="btnradio411" >
-		<label class="btn px-5" for="btnradio411">XT60</label>`
+		<label class="btn px-5 w-100" for="btnradio411">XT60</label>`
 		to_append += `<input type="radio" class="btn-check" connectorName="xt90" value="90" name="btnradio41" id="btnradio412" >
-		<label class="btn px-5" for="btnradio412">XT90</label>`
+		<label class="btn px-5 w-100" for="btnradio412">XT90</label>`
 	} else if(s_value >= 3) {
 		to_append = `<input type="radio" class="btn-check" connectorName="xt60" value="60" name="btnradio41" id="btnradio411" >
-		<label class="btn px-5" for="btnradio411">XT60</label>`
+		<label class="btn px-5 w-100" for="btnradio411">XT60</label>`
 		to_append += `<input type="radio" class="btn-check" connectorName="xt90" value="90" name="btnradio41" id="btnradio412" >
-		<label class="btn px-5" for="btnradio412">XT90</label>`
+		<label class="btn px-5 w-100" for="btnradio412">XT90</label>`
 		to_append += `<input type="radio" class="btn-check" connectorName="qs8-s"  value="8" name="btnradio41" id="btnradio413" >
-		<label class="btn px-5" style="width: 53%" for="btnradio413">QS8-S</label>`
+		<label class="btn px-5 w-100" for="btnradio413">QS8-S</label>`
 	}
 	$("#connectorHolder").append(to_append)
 	$("input[name=btnradio41]").on("click", () => { 
