@@ -147,9 +147,7 @@
 
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </head>
 
 <body>
@@ -539,9 +537,9 @@
                                         <div class="btn-group product-size mb-0">
                                             <div class="form-group col-xl-12 w-100">
                                                 <div class="input-group mb-0">
-                                                    <input input_repeater="1" name="np_tel"
-                                                        style="background-color: white;" type="text" min="1"
-                                                        class="form-control" placeholder="Телефон для НП">
+                                                    <input id="np_tel" input_repeater="1" name="np_tel" onkeypress="return isNumberKey(event)"
+                                                        style="background-color: white;" type="tel" placeholder="380"
+                                                        class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -586,7 +584,7 @@
                         <div class="col-xl-12 col-md-12 col-sm-12 wow">
                             <div class="widget widget_about me-2">
                                 <div class="footer-logo logo-white" style="display: flex; justify-content: center;">
-                                    <a href="/"><img src="./static/krab_text_logo.png" alt=""></a>
+                                    <img src="./static/krab_text_logo.png" alt="">
                                 </div>
 
                             </div>

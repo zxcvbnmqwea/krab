@@ -587,3 +587,17 @@ function validateRadioButtonsInBlock(blockId) {
 
     return isValid;
 }
+
+
+$(document).ready(function(){
+	$('#phone').mask('380 00 000 00 00', {translation: {'0': {pattern: /[0-9]/}}});
+});
+
+function isNumberKey(evt) {
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	// Разрешаем только цифры (48-57) и клавиши управления (Backspace, Delete)
+	if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+		return false;
+	}
+	return true;
+}
