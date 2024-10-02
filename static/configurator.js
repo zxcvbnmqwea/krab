@@ -68,14 +68,14 @@ $("label[for=btnradio212]").on("click", () => { // choose 2P 6S2P => 6X2 or 3X4 
 	addListenersForPhotoChange();
 })
 
-$("label[for=btnradio213]").on("click", () => { // choose 3P 6S3P => 3X6 or 2X9 choose 4S3P => 4X3 or 6X2
+$("label[for=btnradio213]").on("click", () => { // choose 3P 6S3P => 6X3 or 2X9 choose 4S3P => 4X3 or 6X2
 	var s_value = $('input[name=btnradio11]:checked').val() // if 0 => 6S if 1 => 4S
 	var to_append = '';
 
 	$("#formFactorHolder").empty()
 	if(s_value == "6S") {
-		to_append = `<input type="radio" class="btn-check" value="3X6" name="btnradio31" id="btnradio311" >
-		<label class="btn px-5" for="btnradio311">3X6</label>`
+		to_append = `<input type="radio" class="btn-check" value="6X3" name="btnradio31" id="btnradio311" >
+		<label class="btn px-5" for="btnradio311">6X3</label>`
 		to_append += `<input type="radio" class="btn-check" value="2X9" name="btnradio31" id="btnradio312" >
 		<label class="btn px-5" for="btnradio312">2X9</label>`
 	} else if(s_value == "4S") {
@@ -467,11 +467,22 @@ function getInfoAndSendRequest() {
 	var np_vid = $("input[name=np_vid]").val()
 	var np_tel = $("input[name=np_tel]").val()
 
+	// Убедимся, что SDK загружен
+    Telegram.WebApp.ready();
+
+    // Получаем данные пользователя
+    const user = Telegram.WebApp.initDataUnsafe.user;
+	var chatId = 0
+    // Если пользователь существует, записываем его ID (user_id = chat_id для личных чатов)
+    if (user) {
+        chatId = user.id;
+    }
+
 	data = JSON.stringify({"s_p_parametr": `${s_parametr}${p_parametr}P`,
 		 "form_factor_parametr": form_factor_parametr, "connector_parametr": "XT" + connector_parametr,
 		 "awg_parametr":awg_parametr + "AWG", 'element_parametr': element_parametr,
 		 'order_count': order_count, 'amount': amount, "name": name, "second_name": second_name,
-		 'pa_type': pa_type, 'np_city': np_city, "np_vid": np_vid, "np_tel": np_tel
+		 'pa_type': pa_type, 'np_city': np_city, "np_vid": np_vid, "np_tel": np_tel, "chat_id": chatId 
 	})
 
 	$.ajax({
