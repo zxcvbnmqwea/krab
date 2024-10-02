@@ -561,7 +561,10 @@ function validateRadioButtonsInBlock(blockId) {
             console.log(name)
             // Подсвечиваем ближайший элемент <p> выше радиокнопок
             // $('p[name="' + name + '"]').css('color', 'red');
-			$(this).parent().parent().parent().prev("p").css('color', 'red');
+			var needed_p = $(this).parent().parent().parent().prev("p");
+			needed_p.css('color', 'red');
+			needed_p.text("Не обрано")
+			needed_p[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     });
 
@@ -574,7 +577,11 @@ function validateRadioButtonsInBlock(blockId) {
             isValid = false;
             
             // Подсвечиваем ближайший элемент <p> выше текстового инпута
-            $(this).parent().parent().parent().parent().parent().prev("p").css('color', 'red');
+            // $(this).parent().parent().parent().parent().parent().prev("p").css('color', 'red');
+			var needed_p = $(this).parent().parent().parent().parent().parent().prev("p");
+			needed_p.css('color', 'red');
+			needed_p.text("Не обрано")
+			needed_p[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     });
 
