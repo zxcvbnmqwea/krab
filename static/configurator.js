@@ -413,13 +413,10 @@ $("#prev_block_4").click(function() {
 })
 
 function sendTextToP(elem) {
-	var text;
-	if($(elem).attr("name") != "np_tel") {
-		text = $(elem).val()
-	} else {
-		text = "+380" + $(elem).val()
-	}
-	$(elem).parent().parent().parent().parent().parent().prev("p").text(text)
+	setTimeout(() => {
+		$(elem).parent().parent().parent().parent().parent().prev("p").text($(elem).val())
+	}, 100)
+	
 }
 
 $("input[input_repeater=1]").on("input", function() {
@@ -593,16 +590,16 @@ function validateRadioButtonsInBlock(blockId) {
     return isValid;
 }
 
+var element = document.getElementById('np_tel');
+var maskOptions = {
+    mask: '+38(000)000-00-00',
+    lazy: false
+} 
+var mask = new IMask(element, maskOptions);
 
-$(document).ready(function(){
-	$('#phone').mask('380 00 000 00 00', {translation: {'0': {pattern: /[0-9]/}}});
-});
 
 function isNumberKey(evt) {
-	var charCode = (evt.which) ? evt.which : evt.keyCode;
-	// Разрешаем только цифры (48-57) и клавиши управления (Backspace, Delete)
-	if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-		return false;
-	}
-	return true;
-}
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    // Разрешаем только цифры
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+  }
