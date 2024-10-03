@@ -413,8 +413,13 @@ $("#prev_block_4").click(function() {
 })
 
 function sendTextToP(elem) {
-	$(elem).parent().parent().parent().parent().parent().prev("p").text($(elem).val())
-
+	var text;
+	if($(elem).attr("name") != "np_tel") {
+		text = $(elem).val()
+	} else {
+		text = "+380" + $(elem).val()
+	}
+	$(elem).parent().parent().parent().parent().parent().prev("p").text(text)
 }
 
 $("input[input_repeater=1]").on("input", function() {
@@ -445,7 +450,7 @@ function calcPrice() {
 	var element_parametr = $("input[name=btnradio61]:checked").attr("price")
 	var price = +s_parametr * +p_parametr * +element_parametr;
 	var price_without_rounding = (price + 500) * 1.1
-	$("p[name=pr]").text(roundDownTo50(price_without_rounding) * +$("input[name=orderCount]").val())
+	$("p[name=pr]").text(roundDownTo50(price_without_rounding) * +$("input[name=orderCount]").val() + " грн.")
 }
 
 function getInfoAndSendRequest() {
